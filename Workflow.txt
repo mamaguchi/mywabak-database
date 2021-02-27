@@ -1,0 +1,46 @@
+===========
+ BEGINNING
+===========
+Ways to open a new case:
+	BeginMode-1) from saringan bergejala                         [w-case, w/o-case]
+	BeginMode-2) from saringan kontak (cc1, cc2, ...)            [w-case]
+	BeginMode-3) from HSO kontak (cc1, cc2, ...)                 [w-case]
+	BeginMode-4) from mass sampling (bergejala or non-bergejala) [w-case, w/o-case]
+	
+BeginMode-1: Involves KK
+BeginMode-2: Involves KK
+BeginMode-3: Involves IK
+BeginMode-4: Involves KK
+
+
+==========
+ SCENARIO
+==========		
+Scenario-1: w-case:
+-------------------
+- Register and/or Add people to the existing case
+
+	
+Scenario-2: w/o-case:
+---------------------
+- Open a new case
+- Register and/or Add people to the new case
+- (*Case should be transferrable to a known existing case
+  should further investigations indicate so)
+  
+  
+=================
+ OPEN A NEW CASE 
+=================
+- Who can open a new case?                  Doctors only?
+- Who can transfer a case to another case?  Doctors only? 
+
+
+
+
+
+
+
+
+
+

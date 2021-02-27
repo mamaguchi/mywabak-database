@@ -1,0 +1,248 @@
+===========
+ RELATIONS
+===========
+
+1. Case
+-------
+[COMP]
+- id
+---------------------
+[MO]
+- name (format: <Location-Date-Event> or <Location-Date-Temp>)
+- begindt
+- enddt
+- state_enum[]
+- district_enum[]
+- locality
+- description
+- reqsamplingnum
+- reqhsodays
+
+
+2. People
+---------
+[IK/MO/MA/SN]
+- name
+- ic/passport
+- dob
+- gender_enum
+- nationality_enum
+- race_enum
+- telephone
+- address
+- state_enum
+- district_enum
+- pdm (Parlimen/Dun/Mukim)
+- occupation_enum
+- isgovemployee_enum
+
+
+2.1 Case-People
+---------------
+[IK/MO]
+- caseid_foreignkey (case)
+- peopleid_foreignkey (people)
+---------------------
+[IK/MO]
+- symptoms_enum
+- onset
+---------------------
+[IK/MO]
+- contactto_foreignkey (people)
+- lastcontact
+---------------------
+[IK/MO]
+- workloc
+- remarks (format: <IK/MO/SN/MA>:<Remarks>)
+---------------------
+[MO]
+- casetype_enum (local or import A/B/C)
+- caseorigin (*what is the true meaning of this field?)
+- cluster_foreignkey
+---------------------
+[MO]
+- livedeadstat_enum
+- causeofdeath
+
+
+
+3. Cluster
+----------
+[MO-PKD]
+- name
+- begindt
+- enddt
+
+
+4. HSO
+------
+[COMP]
+- id
+-----------
+[IK]
+- people_foreignkey
+- begindt
+- address
+- state_enum
+- district_enum
+- pdm (Parlimen/Dun/Mukim)
+-----------
+[COMP]
+- enddt (determined by Case.reqhsodays & Case-People.lastcontact)
+- extension (days)
+
+
+5. Sampling
+-----------
+[COMP]
+- case_foreignkey (case)
+- people_foreignkey
+- date (based on the date of Case-People.lastcontact)
+(*Sampling requires confirmation by MO-PKD prior to sampling date)
+---------------------
+[MO]
+- type_enum (RTK-Ag / RT-PCR)
+- lab_foreignkey
+- samplingloc_foreginkey
+---------------------
+[MLT]
+- sampletaken
+---------------------
+[IK/MO]
+- result_enum (positive or negative)
+- ctvalue
+
+
+6. Samplingloc
+--------------
+[MO]
+- name
+- state_enum
+- district_enum
+- pdm (Parlimen/Dun/Mukim)
+
+
+7. Lab
+------
+[MLT]
+- name
+- address
+- state_enum
+- district_enum
+- pdm (Parlimen/Dun/Mukim)
+
+
+8. Admission
+------------
+[MO]
+- admdt
+- admcenter_foreignkey
+- dischgdt
+
+
+9. Admcenter
+------------
+[MO]
+- name
+- state_enum
+- distict_enum
+
+
+---------------------------------------------------------------
+
+
+======
+ ENUM
+======
+
+1. Gender
+---------
+- male
+- female
+
+
+2. Race
+-------
+- malay
+- chinese
+- indian
+- orang asli
+- others
+
+
+3. Nationality
+--------------
+- warganegara
+- bukan warganegara
+
+
+4. Co-Morbid
+------------
+- DM
+- HPT
+- Obesity
+- Asthma
+
+
+5. Symptoms
+-----------
+- fever
+- cough
+- sore throat
+- runny nose
+- anosmia
+- aguesia
+
+
+6. LiveDeadStatus
+-----------------
+- alive
+- dead
+
+
+7. State
+--------
+...
+
+
+8. District
+-----------
+...
+
+
+9. Casetype
+-----------
+- local
+- importa
+- importb
+- importc
+
+
+10. Samplingtype
+----------------
+- rtkag
+- rtpcr
+- rtkab
+
+
+11. Samplingresult
+------------------
+- positive
+- negative
+
+
+12. Isgovemployee
+-----------------
+- yes
+- no
+
+
+13. Occupation
+---------------
+- doctor
+- nurse
+- driver
+- self-employed
+
+
+
