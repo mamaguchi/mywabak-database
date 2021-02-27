@@ -13,7 +13,7 @@
 - enddt
 - state_enum[]
 - district_enum[]
-- locality
+- locality[]
 - description
 - reqsamplingnum
 - reqhsodays
@@ -39,7 +39,7 @@
 
 2.1 Case-People
 ---------------
-[IK/MO]
+[IK/MO-PKD]-> Assign a case to IK
 - caseid_foreignkey (case)
 - peopleid_foreignkey (people)
 ---------------------
