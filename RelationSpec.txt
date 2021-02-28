@@ -17,6 +17,8 @@
 - description
 - reqsamplingnum
 - reqhsodays
+- poscases (array of IDs)
+- cluster_foreignkey
 
 
 2. People
@@ -44,12 +46,12 @@
 - peopleid_foreignkey (people)
 ---------------------
 [IK/MO]
-- symptoms_enum
-- onset
----------------------
-[IK/MO]
 - contactto_foreignkey (people)
 - lastcontact
+---------------------
+[IK/MO]
+- symptoms_enum
+- onset
 ---------------------
 [IK/MO]
 - workloc
@@ -58,7 +60,6 @@
 [MO]
 - casetype_enum (local or import A/B/C)
 - caseorigin (*what is the true meaning of this field?)
-- cluster_foreignkey
 ---------------------
 [MO]
 - livedeadstat_enum
@@ -90,6 +91,7 @@
 [COMP]
 - enddt (determined by Case.reqhsodays & Case-People.lastcontact)
 - extension (days)
+- hsofilepath
 
 
 5. Sampling
