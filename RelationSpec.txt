@@ -24,19 +24,19 @@
 2. People
 ---------
 [IK/MO/MA/SN]
-- name
 - ic/passport
-- dob
+- name
 - gender_enum
+- dob
 - nationality_enum
 - race_enum
 - telephone
 - address
 - state_enum
 - district_enum
-- pdm (Parlimen/Dun/Mukim)
+- locality
 - occupation_enum
-- isgovemployee_enum
+- isgovemp_enum
 
 
 2.1 Case-People
@@ -69,6 +69,8 @@
 
 3. Cluster
 ----------
+[COMP]
+- id
 [MO-PKD]
 - name
 - begindt
@@ -86,7 +88,7 @@
 - address
 - state_enum
 - district_enum
-- pdm (Parlimen/Dun/Mukim)
+- locality
 -----------
 [COMP]
 - enddt (determined by Case.reqhsodays & Case-People.lastcontact)
@@ -117,25 +119,31 @@
 
 6. Samplingloc
 --------------
+[COMP]
+- id
 [MO]
 - name
 - state_enum
 - district_enum
-- pdm (Parlimen/Dun/Mukim)
+- locality
 
 
 7. Lab
 ------
+[COMP]
+- id
 [MLT]
 - name
 - address
 - state_enum
 - district_enum
-- pdm (Parlimen/Dun/Mukim)
+- locality
 
 
 8. Admission
 ------------
+[COMP]
+- id
 [MO]
 - admdt
 - admcenter_foreignkey
@@ -144,6 +152,8 @@
 
 9. Admcenter
 ------------
+[COMP]
+- id
 [MO]
 - name
 - state_enum
@@ -233,13 +243,7 @@
 - negative
 
 
-12. Isgovemployee
------------------
-- yes
-- no
-
-
-13. Occupation
+12. Occupation
 ---------------
 - doctor
 - nurse

@@ -3,17 +3,34 @@ begin;
 
 create schema if not exists wbk;
 
+
 drop type if exists gender_t cascade;
 create type gender_t as enum('Male', 'Female');
 
+
 drop type if exists race_t cascade;
-create type race_t as enum('Malay', 'Chinese', 'Indian', 'Others');
+create type race_t as enum('malay', 'chinese', 'indian', 'others');
+
 
 drop type if exists nationality_t cascade;
 create type nationality_t as enum('Warganegara', 'Bukan Warganegara');
 
+
 drop type if exists edu_lvl_t cascade;
 create type edu_lvl_t as enum('Primary', 'Secondary', 'Tertiary');
+
+
+drop type if exists comorbid_t cascade;
+create type comorbid_t as enum('dm', 'hpt', 'obesity', 'asthma');
+
+
+drop type if exists symptom_t cascade;
+create type symptom_t as enum('', 'fever', 'cough', 'sore throat', 'runny nose',
+				'anosmia', 'aguesia');
+				
+drop type if exists livedeadstat_t cascade;
+create type livedeadstat_t as enum('alive', 'dead');		
+
 
 drop type if exists state_t cascade;
 create type state_t as enum(
@@ -33,89 +50,182 @@ create type state_t as enum(
         'Sarawak',
         'Pulau Labuan');
         
+
+drop type if exists district_t cascade;
+create type district_t as enum(
+	'maran',	
+	'kuantan',
+	'lipis',
+	'bera',
+	'bentong',
+	'cameron',
+	'jerantut',
+	'pekan',
+	'raub', 
+	'rompin',
+	'temerloh');
+	
+	
+drop type if exists casetype_t cascade;
+create type casetype_t as enum('local', 'importa', 'importb', 'importc');
+
+
+drop type if exists samplingtype_t cascade;
+create type samplingtype_t as enum('rtkag', 'rtkab', 'rtpcr');
+
+
+drop type if exists samplingres_t cascade;
+create type samplingres_t as enum('positive', 'negative');
+
+
+drop type if exists occupation_t cascade;
+create type occupation_t as enum('doctor', 'nurse', 'driver', 'self-employed');	
+	       
+        
 drop type if exists role_t cascade;
 create type role_t as enum('mo-pkd', 'mo', 'ikk', 'ik', 'ma', 'sn', 'mlt');        
 
+
 drop table if exists wbk.people cascade;
-create table kkm.people
+create table wbk.people
   (
     ident text not null,
     name text not null,
     gender gender_t,
-    dob timestamp,
+    dob date,
     nationality nationality_t,
     race race_t,
     tel text,
-    email text,
     address text, 
-    postalcode text,
+    state state_t, 
+    district district_t,
     locality text,
-    district text,
-    state state_t,       
-    edulvl edu_lvl_t,
-    occupation text,
-    comorbids integer[],
-    supportvac boolean,
-    password text not null,
-    profilepic text,
-    role role_t,
+    occupation occupation_t,
+    isgovemp boolean,
 
     unique(ident)
   );
+  
+  
+drop table if exists wbk.cluster cascade;
+create table wbk.cluster
+  (
+    id serial primary key,    
+    name text not null,
+    begindt date,
+    enddt date,  
+                  
+    unique(name)
+  );
 
-drop table if exists kkm.comorbid cascade;
-create table kkm.comorbid
+
+drop table if exists wbk.wbkcase cascade;
+create table wbk.wbkcase
   (
     id serial primary key,
-    med_illness text not null
+    name text not null,
+    begindt date not null, 
+    enddt date,
+    states state_t[],
+    district district_t[],
+    locality text[],
+    description text,
+    poscases text[],
+    clusterid serial references wbk.cluster(id)  
   );
 
-drop table if exists wbk.vaccine cascade;
-create table kkm.vaccine
-  (
-    id bigserial primary key,
-    brand text not null,
-    type text not null,
-    against text not null,    
-    price numeric(10,2) not null check(price >= 0),
-    raoa text not null,
-    numdose integer not null check(numdose > 0),
-    doseintvl integer not null check(doseintvl > 0),
-    efficacy integer not null,
 
-    unique(brand, type, against)
+drop table if exists wbk.wbkcase_people cascade;
+create table wbk.wbkcase_people
+  (
+    wbkcaseid serial references wbk.wbkcase(id),
+    peopleid text references wbk.people(ident),
+    contactto text references wbk.people(ident),
+    lastcontact date,
+    symptoms symptom_t[],
+    onset date,
+    workloc text,
+    remarks text,
+    casetype casetype_t,
+    caseorigin text,
+    livedeadstat livedeadstat_t,
+    causeofdeath text,  
+        
+    unique(wbkcaseid, peopleid)
+  );   
+  
+  
+drop table if exists wbk.hso cascade;
+create table wbk.hso
+  (
+    id serial primary key,
+    peopleident text references wbk.people(ident),
+    begindt date,
+    enddt date,
+    extension integer check(extension >= 0),
+    address text,
+    state state_t,
+    district district_t,
+    locality text   
   );
-    
-drop type if exists aefi_class_t cascade;
-create type aefi_class_t as enum('None', 'Vaccine-Related', 'Immunization-Error-Related', 
-  'Immunization-Anxiety-Related', 'Coincidental-Events');
 
-drop type if exists aefi_reaction_t cascade;
-create type aefi_reaction_t as enum('', 'Mild', 'Severe', 'Non-Sterile Injection', 
-  'Vaccine Transport/Storage Error', 'Reconstitution Error', 'Injection At Incorrect Site',
-  'Contraindication Ignored', 'Fainting', 'Hyperventilation', 'Vomiting', 'Convulsion');
 
-drop table if exists wbks.vaccination cascade;
-create table kkm.vaccination
+drop table if exists wbk.samplingloc cascade;
+create table wbk.samplingloc
   (
-    id bigserial primary key,    
-    people text not null references kkm.people(ident),
-    vaccination text not null,
-    fdvaccine bigserial references kkm.vaccine(id),
-    sdvaccine bigserial references kkm.vaccine(id),   
-    fdtca timestamp,
-    sdtca timestamp,
-    fdgiven timestamp,
-    sdgiven timestamp,
-    fdaeficlass aefi_class_t,
-    sdaeficlass aefi_class_t,
-    fdaefireaction text[],
-    sdaefireaction text[],    
-    fdremarks text,
-    sdremarks text,       
+    id serial primary key,
+    name text not null,
+    state state_t,
+    district district_t,
+    locality text  
+  );  
+  
+  
+drop table if exists wbk.lab cascade;
+create table wbk.lab
+  (
+    id serial primary key,
+    name text not null,
+    address text,
+    state state_t,
+    district district_t,
+    locality text  
+  );    
+  
+  
+drop table if exists wbk.sampling cascade;
+create table wbk.sampling
+  (
+    wbkcaseid serial references wbk.wbkcase(id),
+    peopleident text references wbk.people(ident),
+    samplingdt date not null,
+    samplingtype samplingtype_t not null,
+    labid serial references wbk.lab(id),
+    samplinglocid serial references wbk.samplingloc(id),
+    issampletaken boolean,
+    samplingres samplingres_t,
+    ctval text           
+  );  
+     
 
-    unique(vaccination, people)
+drop table if exists wbk.admcenter cascade;
+create table wbk.admcenter
+  (
+    id serial primary key,
+    name text not null,
+    state state_t,
+    district district_t        
   );
   
+  
+drop table if exists wbk.admission cascade;
+create table wbk.admission
+  (
+    peopleident text references wbk.people(ident),
+    admcenterid serial references wbk.admcenter(id),
+    admdt date not null,
+    dischgdt date not null           
+  );   
+          
 
 commit;
