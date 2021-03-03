@@ -9,7 +9,7 @@ create type gender_t as enum('Male', 'Female');
 
 
 drop type if exists race_t cascade;
-create type race_t as enum('malay', 'chinese', 'indian', 'others');
+create type race_t as enum('Malay', 'Chinese', 'Indian', 'Others');
 
 
 drop type if exists nationality_t cascade;
@@ -75,11 +75,11 @@ create type samplingtype_t as enum('rtkag', 'rtkab', 'rtpcr');
 
 
 drop type if exists samplingres_t cascade;
-create type samplingres_t as enum('positive', 'negative');
+create type samplingres_t as enum('pending', 'positive', 'negative');
 
 
 drop type if exists occupation_t cascade;
-create type occupation_t as enum('doctor', 'nurse', 'driver', 'self-employed');	
+create type occupation_t as enum('', 'doctor', 'nurse', 'driver', 'self-employed');	
 	       
         
 drop type if exists role_t cascade;
@@ -139,7 +139,7 @@ drop table if exists wbk.wbkcase_people cascade;
 create table wbk.wbkcase_people
   (
     wbkcaseid serial references wbk.wbkcase(id),
-    peopleid text references wbk.people(ident),
+    peopleident text references wbk.people(ident),
     contactto text references wbk.people(ident),
     lastcontact date,
     symptoms symptom_t[],
@@ -148,10 +148,10 @@ create table wbk.wbkcase_people
     remarks text,
     casetype casetype_t,
     caseorigin text,
-    livedeadstat livedeadstat_t,
+    livedeadstat livedeadstat_t default 'alive',
     causeofdeath text,  
         
-    unique(wbkcaseid, peopleid)
+    unique(wbkcaseid, peopleident)
   );   
   
   
