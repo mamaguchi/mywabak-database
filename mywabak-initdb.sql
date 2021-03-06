@@ -53,33 +53,33 @@ create type state_t as enum(
 
 drop type if exists district_t cascade;
 create type district_t as enum(
-	'maran',	
-	'kuantan',
-	'lipis',
-	'bera',
-	'bentong',
-	'cameron',
-	'jerantut',
-	'pekan',
-	'raub', 
-	'rompin',
-	'temerloh');
+	'Maran',	
+	'Kuantan',
+	'Lipis',
+	'Bera',
+	'Bentong',
+	'Cameron',
+	'Jerantut',
+	'Pekan',
+	'Raub', 
+	'Rompin',
+	'Temerloh');
 	
 	
 drop type if exists casetype_t cascade;
-create type casetype_t as enum('local', 'importa', 'importb', 'importc');
+create type casetype_t as enum('Local', 'Import A', 'Import B', 'Import C');
 
 
 drop type if exists samplingtype_t cascade;
-create type samplingtype_t as enum('rtkag', 'rtkab', 'rtpcr');
+create type samplingtype_t as enum('RTK-Ag', 'RTK-Ab', 'RT-PCR');
 
 
 drop type if exists samplingres_t cascade;
-create type samplingres_t as enum('pending', 'positive', 'negative');
+create type samplingres_t as enum('Pending', 'Positive', 'Negative');
 
 
 drop type if exists occupation_t cascade;
-create type occupation_t as enum('', 'doctor', 'nurse', 'driver', 'self-employed');	
+create type occupation_t as enum('', 'Doctor', 'Nurse', 'Driver', 'Self-employed');	
 	       
         
 drop type if exists role_t cascade;
@@ -101,7 +101,7 @@ create table wbk.people
     district district_t,
     locality text,
     occupation occupation_t,
-    isgovemp boolean,
+    isgovemp boolean default false,
 
     unique(ident)
   );
@@ -162,7 +162,7 @@ create table wbk.hso
     peopleident text references wbk.people(ident),
     begindt date,
     enddt date,
-    extension integer check(extension >= 0),
+    extension integer check(extension >= 0) default 0,
     address text,
     state state_t,
     district district_t,
