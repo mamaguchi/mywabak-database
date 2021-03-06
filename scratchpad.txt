@@ -1929,6 +1929,8 @@ curl -H "Content-Type:application/json" http://localhost:8080/hso/update -d "{ \
 
 curl -H "Content-Type:application/json" http://localhost:8080/wbkcase/people/update -d "{ \"name\" : \"bandarjengka-2021-02-01-hospjengka\", \"peopleident\" : \"880601105149\", \"contactto\" : \"880601109999\", \"lastcontact\" : \"2021-01-25\", \"symptoms\" : [\"fever\", \"cough\"], \"onset\" : \"2021-01-28\", \"workloc\" : \"Mydin Mall\", \"remarks\" : \"Work at Apparel Unit\", \"casetype\" : \"importa\", \"livedeadstat\" : \"alive\", \"causeofdeath\" : \"\" }"
 
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/peoples/get -d "{ \"tarikhACD\" : \"2021-03-05\", \"locality\" : \"Jengka 11\", \"district\" : \"Maran\", \"state\" : \"Pahang\" }"
+
 ======================
 10 Feb 2021 - myVaksin
 ======================
