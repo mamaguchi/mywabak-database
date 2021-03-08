@@ -1925,6 +1925,32 @@ curl -H "Content-Type:application/json" http://localhost:8080/people/add -d "{ \
 
 curl -H "Content-Type:application/json" http://localhost:8080/people/update -d "{ \"ident\" : \"880601107777\", \"name\" : \"Sanji\", \"gender\" : \"Female\", \"dob\" : \"1988-07-01\", \"nationality\" : \"Bukan Warganegara\", \"race\" : \"Malay\", \"tel\" : \"0163184120\", \"address\" : \"Awana, Lipis\", \"state\" : \"Pahang\", \"district\" : \"Lipis\", \"locality\" : \"Awana\", \"occupation\" : \"Doctor\", \"isgovemp\" : true }"
 
+======================
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/people/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"name\", \"val\" : \"Person Apple\" }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/people/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"tel\", \"val\" : \"999\" }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/people/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"address\", \"val\" : \"Jengka 18, Maran, Pahang\" }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/people/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"comorbid\", \"val\" : \"DM, HPT\" }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/people/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"gelanghso\", \"val\" : true }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/people/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"annex14\", \"val\" : true }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/people/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"pelepasan\", \"val\" : true }"
+======================
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/acdactivity/updateoc -d "{ \"tarikhACD\" : \"2021-03-05\", \"ident\" : \"880601105150\", \"col\" : \"kategorikes\", \"val\" : \"Warga Emas\" }"
+
+======================
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/sampel/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"jenissampel\", \"val\" : \"RTK-Ag\" }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/sampel/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"sampeltca\", \"val\" : \"2021-03-08 10:00:00\" }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/sampel/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"bildipanggil\", \"val\" : 3 }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/sampel/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"sampeldiambil\", \"val\" : true }"
+======================
 curl -H "Content-Type:application/json" http://localhost:8080/hso/add -d "{ \"idents\" : [\"880601105149\", \"880601105150\", \"880601105151\"], \"begindt\" : \"2021-02-01\", \"enddt\" : \"2021-02-10\", \"extension\" : 0, \"address\" : \"Genting, Bentong\", \"state\" : \"Pahang\", \"district\" : \"Bentong\", \"locality\" : \"Genting\" }"
 
 curl -H "Content-Type:application/json" http://localhost:8080/hso/del -d "{ \"id\" : 4 }"
