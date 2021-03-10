@@ -1949,6 +1949,8 @@ curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/sampe
 
 curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/sampel/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"bildipanggil\", \"val\" : 3 }"
 
+curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/sampel/updateoc -d "{ \"ident\" : \"880601105150\", \"acdName\" : \"acd-pkpd\", \"col\" : \"bildipanggil\", \"val\" : 3 }"
+
 curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/sampel/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"sampeldiambil\", \"val\" : true }"
 ======================
 curl -H "Content-Type:application/json" http://localhost:8080/hso/add -d "{ \"idents\" : [\"880601105149\", \"880601105150\", \"880601105151\"], \"begindt\" : \"2021-02-01\", \"enddt\" : \"2021-02-10\", \"extension\" : 0, \"address\" : \"Genting, Bentong\", \"state\" : \"Pahang\", \"district\" : \"Bentong\", \"locality\" : \"Genting\" }"
