@@ -107,6 +107,28 @@ create table wbk.people
   );
   
   
+drop table if exists wbk.ik cascade;
+create table wbk.ik
+  (
+    ident text not null,
+    name text not null,
+    gender gender_t,
+    dob date,
+    nationality nationality_t,
+    race race_t,
+    tel text,
+    address text, 
+    state state_t, 
+    district district_t,
+    locality text,
+    position text,
+    organization text,
+    unit text,
+
+    unique(ident)
+  ); 
+  
+  
 drop table if exists wbk.cluster cascade;
 create table wbk.cluster
   (
@@ -150,6 +172,9 @@ create table wbk.wbkcase_people
     caseorigin text,
     livedeadstat livedeadstat_t default 'alive',
     causeofdeath text,  
+    assignedtoik text references wbk.ik(ident),
+    hasbeenverified boolean default false,
+    verifiedby text references wbk.ik(ident),
         
     unique(wbkcaseid, peopleident)
   );   

@@ -1909,6 +1909,10 @@ curl -H "Content-Type:application/json" http://localhost:8080/people/get -d "{ \
 
 curl -H "Content-Type:application/json" http://localhost:8080/test -d "{ \"ident\" : \"880601105149\" }"
 
+
+====================
+March 2021 - myWabak
+====================
 curl -H "Content-Type:application/json" http://localhost:8080/poscases -d "{ \"name\" : \"bandarjengka-2021-02-01-hospjengka\" }"
 
 curl -H "Content-Type:application/json" http://localhost:8080/closecontacts -d "{ \"name\" : \"bandarjengka-2021-02-01-hospjengka\" }"
@@ -1919,13 +1923,17 @@ curl -H "Content-Type:application/json" http://localhost:8080/wbkcase/people/add
 
 curl -H "Content-Type:application/json" http://localhost:8080/wbkcase/people/update -d "{ \"name\" : \"bandarjengka-2021-02-01-hospjengka\", \"peopleident\" : \"880601105149\", \"contactto\" : \"880601109999\", \"lastcontact\" : \"2021-01-25\", \"symptoms\" : [\"fever\", \"cough\"], \"onset\" : \"2021-01-28\", \"workloc\" : \"Mydin Mall\", \"remarks\" : \"Work at Apparel Unit\", \"casetype\" : \"Import A\", \"livedeadstat\" : \"alive\", \"causeofdeath\" : \"\" }"
 
-curl -H "Content-Type:application/json" http://localhost:8080/wbkcase/people/del -d "{ \"name\" : \"bandarjengka-2021-02-01-hospjengka\", \"peopleident\" : \"880601109999\" }"
+curl -H "Content-Type:application/json" http://localhost:8080/wbkcase/people/del -d "{ \"casename\" : \"bandarjengka-2021-02-01-hospjengka\", \"peopleident\" : \"880601109999\" }"
 
 curl -H "Content-Type:application/json" http://localhost:8080/people/add -d "{ \"ident\" : \"880601107777\", \"name\" : \"Sanji\", \"gender\" : \"Male\", \"dob\" : \"1988-06-01\", \"nationality\" : \"Warganegara\", \"race\" : \"Chinese\", \"tel\" : \"0163184120\", \"address\" : \"Genting, Bentong\", \"state\" : \"Pahang\", \"district\" : \"Bentong\", \"locality\" : \"Genting\", \"occupation\" : \"Driver\", \"isgovemp\" : false }"
 
 curl -H "Content-Type:application/json" http://localhost:8080/people/update -d "{ \"ident\" : \"880601107777\", \"name\" : \"Sanji\", \"gender\" : \"Female\", \"dob\" : \"1988-07-01\", \"nationality\" : \"Bukan Warganegara\", \"race\" : \"Malay\", \"tel\" : \"0163184120\", \"address\" : \"Awana, Lipis\", \"state\" : \"Pahang\", \"district\" : \"Lipis\", \"locality\" : \"Awana\", \"occupation\" : \"Doctor\", \"isgovemp\" : true }"
 
-======================
+curl -H "Content-Type:application/json" http://localhost:8080/wbkcase/people/add -d "{ \"casename\" : \"bandarjengka-2021-02-01-hospjengka\", \"peopleident\" : \"880601109999\" }"
+
+==================
+March 2021 - myACD
+==================
 curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/people/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"name\", \"val\" : \"Person Apple\" }"
 
 curl -H "Content-Type:application/json" http://localhost:8080/acd/saringan/people/updateoc -d "{ \"ident\" : \"880601105150\", \"col\" : \"tel\", \"val\" : \"999\" }"
