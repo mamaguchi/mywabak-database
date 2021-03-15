@@ -100,10 +100,32 @@ create table wbk.people
     state state_t, 
     district district_t,
     locality text,
-    occupation occupation_t,
+    occupation text,
     isgovemp boolean default false,
 
     unique(ident)
+  );
+  
+  
+drop table if exists wbk.peopletemp cascade;
+create table wbk.peopletemp
+  (
+    wbkcaseid serial references wbk.wbkcase(id),
+    ident text not null,
+    name text not null,
+    gender gender_t,
+    dob date,
+    nationality nationality_t,
+    race race_t,
+    tel text,
+    address text, 
+    state state_t, 
+    district district_t,
+    locality text,
+    occupation text,
+    isgovemp boolean default false,
+
+    unique(wbkcaseid, ident)
   );
   
   
