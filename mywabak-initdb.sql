@@ -102,6 +102,7 @@ create table wbk.people
     locality text,
     occupation text,
     isgovemp boolean default false,
+    comorbid text[],
 
     unique(ident)
   );
@@ -124,6 +125,7 @@ create table wbk.peopletemp
     locality text,
     occupation text,
     isgovemp boolean default false,
+    comorbid text[],
 
     unique(wbkcaseid, ident)
   );
@@ -184,13 +186,13 @@ create table wbk.wbkcase_people
   (
     wbkcaseid serial references wbk.wbkcase(id),
     peopleident text,
-    contactto text references wbk.people(ident),
+    contactto text,
     lastcontact date,
-    symptoms symptom_t[],
+    symptoms text[],
     onset date,
     workloc text,
     remarks text,
-    casetype casetype_t,
+    casetype text,
     caseorigin text,
     livedeadstat livedeadstat_t default 'alive',
     causeofdeath text,  
