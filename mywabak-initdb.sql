@@ -183,7 +183,7 @@ drop table if exists wbk.wbkcase_people cascade;
 create table wbk.wbkcase_people
   (
     wbkcaseid serial references wbk.wbkcase(id),
-    peopleident text references wbk.people(ident),
+    peopleident text,
     contactto text references wbk.people(ident),
     lastcontact date,
     symptoms symptom_t[],
