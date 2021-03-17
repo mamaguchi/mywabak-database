@@ -89,6 +89,7 @@ create type role_t as enum('mo-pkd', 'mo', 'ikk', 'ik', 'ma', 'sn', 'mlt');
 drop table if exists wbk.people cascade;
 create table wbk.people
   (
+    created timestamp default now(),
     ident text not null,
     name text not null,
     gender gender_t,
@@ -111,6 +112,7 @@ create table wbk.people
 drop table if exists wbk.peopletemp cascade;
 create table wbk.peopletemp
   (
+    created timestamp default now(),
     wbkcaseid serial references wbk.wbkcase(id),
     ident text not null,
     name text not null,
@@ -134,6 +136,7 @@ create table wbk.peopletemp
 drop table if exists wbk.ik cascade;
 create table wbk.ik
   (
+    created timestamp default now(),
     ident text not null,
     name text not null,
     gender gender_t,
@@ -156,6 +159,7 @@ create table wbk.ik
 drop table if exists wbk.cluster cascade;
 create table wbk.cluster
   (
+    created timestamp default now(),
     id serial primary key,    
     name text not null,
     begindt date,
@@ -168,6 +172,7 @@ create table wbk.cluster
 drop table if exists wbk.wbkcase cascade;
 create table wbk.wbkcase
   (
+    created timestamp default now(),
     id serial primary key,
     name text not null,
     begindt date not null, 
@@ -184,6 +189,7 @@ create table wbk.wbkcase
 drop table if exists wbk.wbkcase_people cascade;
 create table wbk.wbkcase_people
   (
+    created timestamp default now(),
     wbkcaseid serial references wbk.wbkcase(id),
     peopleident text,
     contactto text,
@@ -207,6 +213,7 @@ create table wbk.wbkcase_people
 drop table if exists wbk.hso cascade;
 create table wbk.hso
   (
+    created timestamp default now(),
     id serial primary key,
     peopleident text references wbk.people(ident),
     begindt date,
