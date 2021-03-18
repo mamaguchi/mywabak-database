@@ -133,8 +133,8 @@ create table wbk.peopletemp
   );
   
   
-drop table if exists wbk.ik cascade;
-create table wbk.ik
+drop table if exists wbk.staff cascade;
+create table wbk.staff
   (
     created timestamp default now(),
     ident text not null,
@@ -148,8 +148,8 @@ create table wbk.ik
     state state_t, 
     district district_t,
     locality text,
-    position text,
     organization text,
+    position text,    
     unit text,
 
     unique(ident)
@@ -182,7 +182,8 @@ create table wbk.wbkcase
     locality text[],
     description text,
     poscases text[],
-    clusterid serial references wbk.cluster(id)  
+    clusterid serial references wbk.cluster(id),
+    assignedStaffs text[]
   );
 
 
@@ -202,9 +203,9 @@ create table wbk.wbkcase_people
     caseorigin text,
     livedeadstat livedeadstat_t default 'alive',
     causeofdeath text,  
-    assignedtoik text references wbk.ik(ident),
+    assignedtoik text references wbk.staff(ident),
     hasbeenverified boolean default false,
-    verifiedby text references wbk.ik(ident),
+    verifiedby text references wbk.staff(ident),
         
     unique(wbkcaseid, peopleident)
   );   
