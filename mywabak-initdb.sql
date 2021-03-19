@@ -151,6 +151,7 @@ create table wbk.staff
     organization text,
     position text,    
     unit text,
+    workloc text,
 
     unique(ident)
   ); 
@@ -183,7 +184,7 @@ create table wbk.wbkcase
     description text,
     poscases text[],
     clusterid serial references wbk.cluster(id),
-    assignedStaffs text[]
+    assignedstaffs text[]
   );
 
 

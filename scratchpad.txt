@@ -1937,6 +1937,11 @@ curl -H "Content-Type:application/json" http://localhost:8080/wbkcase/people/reg
 
 curl -H "Content-Type:application/json" http://localhost:8080/cc/new/get -d "{ \"casename\" : \"bandarjengka-2021-02-01-hospjengka\", \"assignedToIk\" : \"880601101111\" }"
 
+
+curl -H "Content-Type:application/json" http://localhost:8080/staff/get -d "{ \"healthOrg\" : \"PKD Maran\" }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/staff/assigned/get -d "{ \"casename\" : \"bandarjengka-2021-02-01-hospjengka\", \"healthOrg\" : \"PKD Maran\" }"
+
 ==================
 March 2021 - myACD
 ==================
