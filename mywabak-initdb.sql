@@ -178,13 +178,15 @@ create table wbk.wbkcase
     name text not null,
     begindt date not null, 
     enddt date,
-    states state_t[],
-    district district_t[],
-    locality text[],
     description text,
+    state text,
+    district text,
+    localities text[],    
     poscases text[],
-    clusterid serial references wbk.cluster(id),
-    assignedstaffs text[]
+    assignedstaffs text[],
+    clusterid integer references wbk.cluster(id),
+    
+    unique(name)   
   );
 
 
@@ -257,6 +259,7 @@ create table wbk.sampling
     wbkcaseid serial references wbk.wbkcase(id),
     peopleident text references wbk.people(ident),
     samplingdt date not null,
+    resultdt date,
     samplingtype samplingtype_t not null,
     labid serial references wbk.lab(id),
     samplinglocid serial references wbk.samplingloc(id),

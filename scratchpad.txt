@@ -1942,6 +1942,15 @@ curl -H "Content-Type:application/json" http://localhost:8080/staff/get -d "{ \"
 
 curl -H "Content-Type:application/json" http://localhost:8080/staff/assigned/get -d "{ \"casename\" : \"bandarjengka-2021-02-01-hospjengka\", \"healthOrg\" : \"PKD Maran\" }"
 
+curl -H "Content-Type:application/json" http://localhost:8080/staff/assigned/set -d "{ \"casename\" : \"bandarjengka-2021-02-01-hospjengka\", \"assignedStaffs\" : [\"880601101111\", \"880601102222\"] }"
+
+curl -H "Content-Type:application/json" http://localhost:8080/staff/assigned/set -d "{ \"casename\" : \"bandarjengka-2021-02-01-hospjengka\", \"description\" : \"Hot Case\", \"assignedStaffs\" : [\"880601101111\", \"880601102222\"], \"states\" : [\"Pahang\", \"Selangor\"], \"districts\" : [\"Maran\", \"Klang\"] }"
+
+
+curl -H "Content-Type:application/json" http://localhost:8080/wbkcases/district/get -d "{ \"state\" : \"Pahang\", \"district\" : \"Maran\" }"
+
+
+
 ==================
 March 2021 - myACD
 ==================
@@ -2018,5 +2027,100 @@ patrick@patrick-ubuntu20-04:~$ curl http://localhost:8080/delete/people -H "Cont
 ====================== SELECT <specific people>
 kkm=> select kkm.people.*, kkm.vaccine.*, kkm.vaccination.* from kkm.people join kkm.vaccination on kkm.people.ident = kkm.vaccination.people join kkm.vaccine on kkm.vaccination.vaccine = kkm.vaccine.id where kkm.people.ident='880601105149';
 
+
+=====
+JUNK
+=====
+    <v-sheet
+      id="scrolling-techniques-4"
+      class="overflow-y-auto"
+      max-height="1000"
+      max-width="1000"
+    >
+      <v-container
+        style="height: 1000px;"
+        fluid
+        fill-height
+        class="grey lighten-2"
+      >
+        <v-tabs-items v-model="tab">
+          <v-tab-item
+            v-for="tabitem in tabItems"
+            :key="tabitem"
+          >
+            <v-row>
+              <v-col
+                cols="12"
+              >
+                <v-card
+                  flat
+
+                  class="mt-2 mx-1"
+                >
+                  <span>Hello world</span>
+                  <v-list two-line>
+                    <v-virtual-scroll
+                      :items="staffsDisp[tabitem]"
+                      :item-height="40"
+                      height="500"
+                    >
+                      <template #default="{ item }">
+                        <!-- SUBHEADER -->
+                        <v-subheader
+                          v-if="item.header"
+                          :key="item.header"
+                          v-text="item.header"
+                        />
+
+                        <!-- DIVIDER -->
+                        <v-subheader
+                          v-else-if="item.divider"
+                          :key="item.idx"
+                          class="mt-3"
+                        >
+                          <v-divider
+                            :inset="item.inset"
+                          />
+                        </v-subheader>
+
+                        <!-- LIST OF OFFICERS -->
+                        <v-list-item
+                          v-else
+                        >
+                          <v-list-item-avatar>
+                            <v-avatar
+                              color="teal lighten-5"
+                              size="40"
+                              class="teal--text text--accent-4"
+                            >
+                              {{ item.initials }}
+                            </v-avatar>
+                          </v-list-item-avatar>
+
+                          <v-list-item-content>
+                            <v-list-item-title class="ml-4">
+                              {{ item.name }}
+                            </v-list-item-title>
+                          </v-list-item-content>
+
+                          <!-- :input-value="active"  -->
+                          <v-list-item-action>
+                            <v-checkbox
+                              v-model="item.tick"
+                              color="teal accent-4"
+                              @change="addRemoveOfficer(item)"
+                            />
+                          </v-list-item-action>
+                        </v-list-item>
+                      </template>
+                    </v-virtual-scroll>
+                  </v-list>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-container>
+    </v-sheet>
 
 
